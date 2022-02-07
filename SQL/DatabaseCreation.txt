@@ -1,0 +1,55 @@
+CREATE TABLE [dbo].[AppUser] (
+    [Id]        VARCHAR (50)   NOT NULL,
+    [Name]      VARCHAR (50)   NOT NULL,
+    [Password]  VARBINARY (50) NOT NULL,
+    [Role]      VARCHAR (50)   NOT NULL,
+    [LastLogin] DATETIME       NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[CourseAttendance] (
+    [CourseId]           INT           NOT NULL,
+    [Participant_Name]   VARCHAR (255) NOT NULL,
+    [Attendance]         INT           NULL,
+    [CourseSurveyResult] INT           NULL,
+    PRIMARY KEY CLUSTERED ([CourseId] ASC, [Participant_Name] ASC)
+);
+
+
+CREATE TABLE [dbo].[CourseSchedule] (
+    [CourseScheduleId] INT           NOT NULL,
+    [TrainerId]        VARCHAR (150) NULL,
+    [CourseId]         INT           NULL,
+    [Date]             DATE          NULL,
+    [StartTime]        TIME (7)      NULL,
+    [EndTime]          TIME (7)      NULL,
+    [Venue]            VARCHAR (150) NULL,
+    [CourseName]       VARCHAR (150) NULL,
+    PRIMARY KEY CLUSTERED ([CourseScheduleId] ASC)
+);
+
+CREATE TABLE [dbo].[CourseView] (
+    [ViewId]     INT          IDENTITY (1, 1) NOT NULL,
+    [CourseDate] DATETIME     NOT NULL,
+    [CourseName] VARCHAR (50) NOT NULL,
+    [CreatedBy]  VARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([ViewId] ASC)
+);
+
+CREATE TABLE [dbo].[MugOrder] (
+    [Id]                INT           IDENTITY (1, 1) NOT NULL,
+    [Email]             VARCHAR (50)  NOT NULL,
+    [FullName]          VARCHAR (50)  NOT NULL,
+    [Courses]           VARCHAR (MAX) NOT NULL,
+    [DOB]               DATE          NOT NULL,
+    [CreatedBy]         VARCHAR (50)  NULL,
+    [AdditionalCourses] VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[ScheduleAttendance] (
+    [ScheduleAttendance] INT NOT NULL,
+    [CourseScheduleId]   INT NOT NULL,
+    [CourseAttendanceId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([ScheduleAttendance] ASC)
+);
