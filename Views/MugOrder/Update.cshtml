@@ -1,0 +1,47 @@
+﻿@model MugOrder
+
+@{
+    ViewData["Title"] = "Update Trainer Profile";
+}
+
+
+@section ScriptSection {
+    <script type="text/javascript">
+        $(function () {
+            $("input[name=btnPassport]").click(function () {
+                if ($(this).val() == "Yes") {
+                    $("#txtQty1").show();
+                } else {
+                    $("#txtQty1").hide();
+                }
+            });
+        });
+    </script>
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-10">
+        <form asp-controller="MugOrder" asp-action="Update" method="post" class="form-horizontal" role="form">
+            <div class="form-horizontal">
+                <div class="form-group row">
+                    <label asp-for="Id" class="col-3 control-label"></label>
+                    <div class="col-7">
+                        <input asp-for="Id" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+
+                @{
+                    Html.RenderPartial("_MugOrder");
+                }
+
+                    <div class="form-group row">
+                        <div class="col-offset-3 col-10">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>

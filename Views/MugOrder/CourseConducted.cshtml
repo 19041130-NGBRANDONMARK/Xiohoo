@@ -1,0 +1,68 @@
+﻿@model CourseConduct
+
+@{
+    ViewBag.Title = "Course Conduct";
+}
+
+@{
+    // Code here
+}
+
+<h2>Past Courses</h2>
+
+<span style="color:red">@TempData["Msg"]</span>
+<br />
+
+<form asp-controller="MugOrder" asp-action="CourseConducted" method="post">
+    <table class="table">
+        
+        <!--Testing to see whether it matches with the same AppUser-->
+            @*<td>
+                Welcome
+            </td>
+            <td colspan="5">
+                @{
+                    @Model.TrainerName;
+                }
+            </td>*@
+            
+        <tr>
+            <th>Schedule ID</th>
+            <th>Trainer</th>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Venue</th>
+            <th>Actions</th>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Created By</th>
+            }
+
+        </tr>
+
+        @{
+            foreach (var item in Model.CourseSchedule)
+            {
+                <tr>
+                    <td>@item.CourseScheduleId</td>
+                    <td>@item.TrainerId</td>
+                    <td>@item.CourseId</td>
+                    <td>@item.CourseName</td>
+                    <td>@item.Date.ToString(string.Format("dd/MM/yyyy")) </td>
+                    <td>@(new DateTime(item.StartTime.Ticks).ToString("hh:mm tt"))</td>
+                    <td>@(new DateTime(item.EndTime.Ticks).ToString("hh:mm tt"))</td>
+                    <td>@item.Venue</td>
+                    <td>
+                        <a asp-action="AttendanceUpdatedPast" asp-route-id="@item.CourseId">Attendance</a>
+                        <a asp-action="" asp-route-id="">Survey</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+</form>

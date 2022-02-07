@@ -1,0 +1,31 @@
+﻿@model XioHoo
+
+@{
+    ViewData["Title"] = "New Mug Order";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-7">
+        <form asp-controller="MugOrder" asp-action="Create" method="post" class="form-horizontal" role="form">
+            <div class="form-horizontal">
+                @{
+                    Html.RenderPartial("_MugOrder");
+                }
+                <div class="form-group row">
+                    <label class="col-3 control-label">Subtotal: </label>
+                    <div class="col-6" style="padding-right:15px">
+                        <input id="txtSubtotal" class="form-control" readonly="readonly" value="0" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-offset-3 col-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

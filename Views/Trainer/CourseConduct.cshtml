@@ -1,0 +1,73 @@
+﻿@model CourseConduct
+
+@{
+    ViewBag.Title = "Course Conduct";
+}
+
+@{
+    // Code here
+}
+
+<h2>Upcoming Courses</h2>
+
+<span style="color:red">@TempData["Msg"]</span>
+<br />
+
+<form asp-controller="MugOrder" asp-action="CourseConduct" method="post">
+    <table class="table">
+        <tr>
+            <td>
+                Welcome
+            </td>
+            <td colspan="5">
+                @{ 
+                    @Model.TrainerName;
+                }
+            </td>
+            <td>
+            </td>
+<tr>
+            <th>Schedule ID</th>
+            <th>Trainer</th>
+            <th>Course ID</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Venue</th>
+            <th>Actions</th>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Created By</th>
+            }
+
+        </tr>
+
+
+        @{
+            foreach (var item in Model.CourseSchedule)
+            {
+                <tr>
+                    <td>@item.CourseScheduleId</td>
+                    <td>@item.TrainerId</td>
+                    <td>@item.CourseId</td>
+                    <!----<td>atHtml.ValueFor(model => item.Date, "{0:dd/MM/yyyy}")</td -->
+                    <td>@item.Date.ToString(string.Format("dd/MMMM/yyyy"))</td>
+                    <td>@item.StartTime</td>
+                    <td>@item.EndTime</td>
+                    <td>@item.Venue</td>
+                    <td>
+                        <a asp-action="AttendanceUpdate" asp-route-id="@item.CourseScheduleId">Attendance</a>
+                        <a asp-action="" asp-route-id="">Survey</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    @*<div class="form-group row">
+        <div class="col-offset-3 col-10">
+            <input type="submit" value="update" class="btn btn-primary" />
+        </div>
+    </div>*@
+</form>

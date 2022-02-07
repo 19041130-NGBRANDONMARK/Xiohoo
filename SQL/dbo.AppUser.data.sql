@@ -1,0 +1,5 @@
+INSERT INTO [dbo].[AppUser] ([Id], [Name], [Password], [Role], [LastLogin]) VALUES (N'deslee@yahoo.com', N'Desmond Lee', 0x5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8, N'Admin', N'2021-12-20 18:45:37')
+INSERT INTO [dbo].[AppUser] ([Id], [Name], [Password], [Role], [LastLogin]) VALUES (N'dorta@yahoo.com', N'Dorothy Ta', 0x5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8, N'Trainer', N'2021-12-26 16:30:00')
+INSERT INTO [dbo].[AppUser] ([Id], [Name], [Password], [Role], [LastLogin]) VALUES (N'felkang@yahoo.com', N'Felicia Kang', 0x5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8, N'Trainer', N'2021-12-26 15:05:37')
+INSERT INTO [dbo].[AppUser] ([Id], [Name], [Password], [Role], [LastLogin]) VALUES (N'jonlee@yahoo.com', N'Jonathan Lee', 0x5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8, N'Trainer', N'2021-12-13 19:23:36')
+INSERT INTO [dbo].[AppUser] ([Id], [Name], [Password], [Role], [LastLogin]) VALUES (N'neltan@yahoo.com', N'Nelson Tan', 0x5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8, N'User', N'2021-12-10 13:24:33')

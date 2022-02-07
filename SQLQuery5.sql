@@ -1,0 +1,1 @@
+﻿SELECT * FROM CourseSchedule WHERE TrainerId <> 1;

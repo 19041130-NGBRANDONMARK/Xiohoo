@@ -1,0 +1,68 @@
+﻿@model List<CourseAttendance>
+
+@{
+    ViewData["Title"] = "Student Attendance";
+}
+@{
+    var AttendanceArray = new[]
+    {
+new { value=1, text="Present"},
+new { value=0, text="Absent"}
+};
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-10">
+        <form asp-controller="MugOrder" asp-action="AttendanceUpdate" method="post" class="form-horizontal" role="form">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Participant Name</th>
+                    <th>Attendance</th>
+                </tr>
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+
+                    <tr>
+                        <td><input asp-for="@Model[i].CourseId" class="form-control" readonly="readonly" style="width:70px"/></td>
+                        <td><input asp-for="@Model[i].Participant_Name" class="form-control" readonly="readonly" style="width:auto" /></td>
+                        <!--<td><input type="text" asp-for="Model[i].Attendance" /></td>-->
+                        <td>
+                            @foreach (var item in AttendanceArray)
+                            {
+                                <input type="radio" asp-for="@Model[i].Attendance" value="@item.value" />
+                                @item.text
+                            }
+                        </td>
+                        <span asp-validation-for="@Model[i].Attendance" class="text-danger"></span>
+                    </tr>
+
+                }
+                <tr>
+                </tr>
+            </table>
+            <div class="form-group row">
+                <div class="col-offset-3 col-10">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </div>
+
+            <!--<div class="form-horizontal">
+                    <div class="form-group row">
+                        <label asp-for="courseAttendanceId" class="col-3 control-label">Course Attendance ID</label>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Participant_Name" class="col-3 control-label">Student Name</label>
+                    </div>
+
+                    <div class="form-group row row">
+                        <label class="control-label col-3" asp-for="Attendance">Attendance </label>
+                    </div>
+            </div>-->
+        </form>
+    </div>
+</div>

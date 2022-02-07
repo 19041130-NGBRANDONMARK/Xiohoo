@@ -1,0 +1,2 @@
+﻿ALTER TABLE CourseSchedule
+ALTER COLUMN TrainerId VARCHAR(150);

@@ -1,0 +1,61 @@
+﻿@model CourseConduct
+
+@{
+    ViewBag.Title = "Course Conduct";
+}
+
+@{
+    // Code here
+}
+
+<h2>Past Courses</h2>
+
+<span style="color:red">@TempData["Msg"]</span>
+<br />
+
+<form asp-controller="MugOrder" asp-action="CourseConducted" method="post">
+    <table class="table">
+        <tr>
+            <td>
+                Welcome
+            </td>
+            <td colspan="5">
+                @{
+                    @Model.TrainerName;
+                }
+            </td>
+            <td>
+            </td>
+        <tr>
+            <th>Schedule ID</th>
+            <th>Trainer</th>
+            <th>Course ID</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Venue</th>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Created By</th>
+            }
+
+        </tr>
+
+        @{
+            foreach (var item in Model.CourseSchedule)
+            {
+                <tr>
+                    <td>@item.CourseScheduleId</td>
+                    <td>@item.TrainerId</td>
+                    <td>@item.CourseId</td>
+                    <td>@item.Date.ToString(string.Format("dd/MMMM/yyyy")) </td>
+                    <td>@item.StartTime</td>
+                    <td>@item.EndTime</td>
+                    <td>@item.Venue</td>
+                </tr>
+            }
+        }
+    </table>
+
+</form>
