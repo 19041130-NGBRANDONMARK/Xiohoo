@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Trainer\**" />
+    <Compile Remove="Views\XioHoo\**" />
+    <Content Remove="Views\Trainer\**" />
+    <Content Remove="Views\XioHoo\**" />
+    <EmbeddedResource Remove="Views\Trainer\**" />
+    <EmbeddedResource Remove="Views\XioHoo\**" />
+    <None Remove="Views\Trainer\**" />
+    <None Remove="Views\XioHoo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
@@ -14,10 +25,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Trainer\" />
   </ItemGroup>
 
 

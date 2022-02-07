@@ -15,5 +15,7 @@ namespace Lesson05.Models
 
         public int Attendance { get; set; }
 
+        public int CourseSurveyResult { get; set; }
+
     }
 }

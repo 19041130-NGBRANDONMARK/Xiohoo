@@ -161,6 +161,43 @@ namespace Lesson05.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult AttendanceUpdate(List<CourseAttendance> CA)
+        {
+            if (ModelState.IsValid)
+            {
+                for (int i = 0; i < CA.Count(); i++)
+                {
+                    DbSet<CourseAttendance> dbs = _dbContext.CourseAttendance;
+                    //CourseAttendance tOrder = dbs.Where(mo => mo.CourseID == CA[i].CourseID).FirstOrfault();
+                    CourseAttendance tOrder = dbs.Where(mo => mo.CourseId == CA[i].CourseId &&
+                        mo.Participant_Name == CA[i].Participant_Name).FirstOrDefault();
+
+
+                    if (tOrder != null)
+                    {
+                        tOrder.Attendance = CA[i].Attendance;
+
+                        if (_dbContext.SaveChanges() == 1)
+                            TempData["Msg"] = "Attendance updated!";
+                        //else
+                        //TempData["Msg"] = "Failed to update database!";
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Failed to update database!";
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            else
+            {
+                TempData["Msg"] = "Invalid information entered";
+            }
+            return RedirectToAction("Index");
+        }
+
         //viewing of past courses attendance
         [Authorize]
         public IActionResult AttendanceUpdatedPast(int id)
@@ -185,28 +222,52 @@ namespace Lesson05.Controllers
             }
         }
 
+
+        [Authorize]
+        public IActionResult CourseSurveyResult(int id)
+        {
+            var AU = DBUtl.GetList("SELECT CourseID FROM CourseAttendance");
+            ViewData["AU"] = new SelectList(AU, "Id");
+
+            // string userid = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //List<CourseAttendance> lstBooking = DBUtl.GetList<CourseAttendance>("SELECT * FROM CourseAttendance WHERE courseAttendanceId='{0}'", id, userid);
+
+            List<CourseAttendance> model = DBUtl.GetList<CourseAttendance>("SELECT * FROM CourseAttendance WHERE CourseID = " + id);
+
+            if (model.Count > 0)
+            {
+                //CourseAttendance model = lstBooking[0];
+                return View(model);
+            }
+            else
+            {
+                TempData["Msg"] = $"Survey Result {id} not found!";
+                return RedirectToAction("Index");
+            }
+        }
+
         [HttpPost]
         [Authorize]
-        public IActionResult AttendanceUpdate(List<CourseAttendance> CA)
+        public IActionResult CourseSurveyResult(List<CourseAttendance> SRU)
         {
             if (ModelState.IsValid)
             {
-                for (int i = 0; i < CA.Count(); i++)
+                for (int i = 0; i < SRU.Count(); i++)
                 {
                     DbSet<CourseAttendance> dbs = _dbContext.CourseAttendance;
                     //CourseAttendance tOrder = dbs.Where(mo => mo.CourseID == CA[i].CourseID).FirstOrfault();
-                    CourseAttendance tOrder = dbs.Where(mo => mo.CourseId == CA[i].CourseId &&
-                        mo.Participant_Name == CA[i].Participant_Name).FirstOrDefault();
+                    CourseAttendance tOrder = dbs.Where(mo => mo.CourseId == SRU[i].CourseId &&
+                        mo.Participant_Name == SRU[i].Participant_Name).FirstOrDefault();
 
-                    
+
                     if (tOrder != null)
                     {
-                        tOrder.Attendance = CA[i].Attendance;
+                        tOrder.CourseSurveyResult = SRU[i].CourseSurveyResult;
 
                         if (_dbContext.SaveChanges() == 1)
-                            TempData["Msg"] = "Attendance updated!";
+                            TempData["Msg"] = "Course Survey Result updated!";
                         //else
-                            //TempData["Msg"] = "Failed to update database!";
+                        //TempData["Msg"] = "Failed to update database!";
                     }
                     else
                     {
@@ -221,5 +282,38 @@ namespace Lesson05.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+
+        [Authorize]
+        public IActionResult PastCourseSurveyResult(int id)
+        {
+            var AU = DBUtl.GetList("SELECT CourseID FROM CourseAttendance");
+            ViewData["AU"] = new SelectList(AU, "Id");
+
+            // string userid = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //List<CourseAttendance> lstBooking = DBUtl.GetList<CourseAttendance>("SELECT * FROM CourseAttendance WHERE courseAttendanceId='{0}'", id, userid);
+
+            List<CourseAttendance> model = DBUtl.GetList<CourseAttendance>("SELECT * FROM CourseAttendance WHERE CourseID = " + id);
+
+            if (model.Count > 0)
+            {
+                //CourseAttendance model = lstBooking[0];
+                return View(model);
+            }
+            else
+            {
+                TempData["Msg"] = $"Survey Result {id} not found!";
+                return RedirectToAction("Index");
+            }
+        }
+
+
+
+
+
+
+
+
     }
 }

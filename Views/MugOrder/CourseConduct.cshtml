@@ -59,7 +59,7 @@
                     <td>@item.Venue</td>
                     <td>
                         <a asp-action="AttendanceUpdate" asp-route-id="@item.CourseId">Attendance</a>
-                        <a asp-action="" asp-route-id="">Survey</a>
+                        <a asp-action="CourseSurveyResult" asp-route-id="@item.CourseId">Survey</a>
                     </td>
                 </tr>
             }

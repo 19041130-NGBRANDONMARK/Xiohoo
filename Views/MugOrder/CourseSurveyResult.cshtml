@@ -1,43 +1,44 @@
 ﻿@model List<CourseAttendance>
 
 @{
-    ViewData["Title"] = "Student Attendance";
+    ViewData["Title"] = "Student Survey Submission";
 }
 @{
-    var AttendanceArray = new[]
+    var CourseSurvey = new[]
     {
-new { value=1, text="Present"},
-new { value=0, text="Absent"}
-};
+        new { value=1, text="Completed"},
+        new { value=0, text="Not Completed"}
+    };
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <div class="row">
     <div class="col-10">
-        <form asp-controller="MugOrder" asp-action="AttendanceUpdate" method="post" class="form-horizontal" role="form">
+        <form asp-controller="MugOrder" asp-action="CourseSurveyResult" method="post" class="form-horizontal" role="form">
             <table class="table">
                 <tr>
                     <th>ID</th>
                     <th>Participant Name</th>
-                    <th>Attendance</th>
+                    <th>Survey</th>
                 </tr>
 
                 @for (int i = 0; i < Model.Count(); i++)
                 {
 
-            <tr>
-                <td><input asp-for="@Model[i].CourseId" class="form-control" readonly="readonly" /></td>
-                <td><input asp-for="@Model[i].Participant_Name" class="form-control" readonly="readonly" /></td>
-                <!--<td><input type="text" asp-for="Model[i].Attendance" /></td>-->
-            <td>
-                @foreach (var item in AttendanceArray)
-                {<input type="radio" asp-for="@Model[i].Attendance" value="@item.value" />
-                    @item.text
-                }
+                    <tr>
+                        <td><input asp-for="@Model[i].CourseId" class="form-control" readonly="readonly" style="width:70px" /></td>
+                        <td><input asp-for="@Model[i].Participant_Name" class="form-control" readonly="readonly" style="width:auto" /></td>
+                        <!--<td><input type="text" asp-for="Model[i].Attendance" /></td>-->
+                        <td>
+                            @foreach (var item in CourseSurvey)
+                            {
+                                <input type="radio" asp-for="@Model[i].CourseSurveyResult" value="@item.value" />
+                                @item.text
+                            }
                         </td>
-                <span asp-validation-for="@Model[i].Attendance" class="text-danger"></span>
-            </tr>
+                        <span asp-validation-for="@Model[i].CourseSurveyResult" class="text-danger"></span>
+                    </tr>
 
                 }
                 <tr>
